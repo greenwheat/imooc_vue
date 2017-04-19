@@ -1,0 +1,41 @@
+.border-1px {
+  position: relative;
+}
+
+.border-1px:before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  display: block;
+  visibility: visible;
+  overflow: auto;
+  content: '';
+  transform: scale(1);
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+  .border-1px:before {
+    right: -100%;
+    bottom: -100%;
+    transform: scale(0.5);
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 3) {
+  .border-1px:before {
+    right: -200%;
+    bottom: -200%;
+    transform: scale(0.333333);
+  }
+}
+
+.radius-50p,
+.radius-50p:after,
+.radius-50p:before {
+  border-radius: 50%;
+}

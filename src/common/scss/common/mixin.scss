@@ -1,0 +1,19 @@
+@mixin border-1px($color) {
+  .border-1px {
+    &.border-all:before {
+      border: 1px solid $color;
+    }
+    &.border-top:before {
+      border-top: 1px solid $color;
+    }
+    &.border-bottom:before {
+      border-bottom: 1px solid $color;
+    }
+    &.border-left:before {
+      border-left: 1px solid $color;
+    }
+    &.border-right:before {
+      border-right: 1px solid $color;
+    }
+  }
+}
