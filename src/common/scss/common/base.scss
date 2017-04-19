@@ -8,4 +8,20 @@ html {
   line-height: 1;
 }
 
+.bfc {
+  overflow: hidden;
+}
+
+.bfc:before,
+.bfc:after {
+  display: block;
+  visibility: hidden;
+  overflow: hidden;
+  content: '';
+}
+
+.bfc:after {
+  clear: both
+}
+
 @include border-1px(#eee);

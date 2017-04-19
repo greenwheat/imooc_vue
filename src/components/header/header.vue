@@ -23,12 +23,14 @@
         </div>
       </div>
       <div v-if="seller.supports"
-           class="support-count">
+           class="support-count"
+           @click="showDetail">
         <span class="count">{{seller.supports.length}}个</span>
         <i class="icon-keyboard_arrow_right"></i>
       </div>
     </div>
-    <div class="bulletin-wrapper">
+    <div class="bulletin-wrapper"
+         @click="showDetail">
       <span class="bulletin-title"></span>
       <span class="bulletin-text">{{seller.bulletin}}</span>
       <i class="icon-keyboard_arrow_right"></i>
@@ -39,18 +41,50 @@
            height="100%"
            alt="">
     </div>
+    <div v-show="detailShow"
+         class="detail">
+      <div class="detail-wrapper bfc">
+        <div class="detail-main">
+          <h1 class="name">{{seller.name}}</h1>
+          <div class="star-wrapper">
+            <star :size="48"
+                  :score="seller.score"></star>
+          </div>
+  
+          <!--<p>{{seller.bulletin}}</p>-->
+  
+        </div>
+      </div>
+      <div class="detail-close">
+        <i class="icon-close"></i>
+      </div>
+    </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+import star from '@/components/star'
 export default {
   props: {
     seller: {
       type: Object
     }
   },
+  data() {
+    return {
+      detailShow: true
+    }
+  },
+  methods: {
+    showDetail() {
+      this.detailShow = true
+    }
+  },
   created() {
     this.classMap = ['decrease', 'discount', 'guarantee', 'invocie', 'special']
+  },
+  components: {
+    star
   }
 }
 </script>
@@ -59,8 +93,10 @@ export default {
 @import './../../common/scss/common/mixin';
 .header {
   position: relative;
+  overflow: hidden;
   color: #fff;
   background: rgba(7, 17, 27, 0.5);
+
   .content-wrapper {
     position: relative;
     padding: 24px 12px 18px 24px;
@@ -159,7 +195,7 @@ export default {
     .bulletin-title {
       display: inline-block;
       vertical-align: top;
-      margin-top: 7px;
+      margin-top: 8px;
       width: 22px;
       height: 12px;
       @include bg-image('bulletin');
@@ -186,6 +222,44 @@ export default {
     height: 100%;
     z-index: -1;
     filter: blur(10px);
+  }
+  .detail {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: rgba(7, 17, 27, 0.8);
+
+    .detail-wrapper {
+      width: 100%;
+      min-height: 100%;
+      .detail-main {
+        margin-top: 64px;
+        padding-bottom: 64px;
+        .name {
+          line-height: 16px;
+          text-align: center;
+          font-size: 16px;
+          font-weight: 700;
+        }
+        .star-wrapper {
+          margin-top: 18px;
+          padding: 2px 0;
+          text-align: center;
+        }
+      }
+    }
+    .detail-close {
+      position: relative;
+      width: 32px;
+      height: 32px;
+      margin: -64px auto 0 auto;
+      clear: both;
+      font-size: 32px;
+    }
   }
 }
 </style>
