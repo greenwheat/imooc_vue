@@ -59,7 +59,8 @@
   
         </div>
       </div>
-      <div class="detail-close">
+      <div class="detail-close"
+           @click="hideDetail">
         <i class="icon-close"></i>
       </div>
     </div>
@@ -82,6 +83,9 @@ export default {
   methods: {
     showDetail() {
       this.detailShow = true
+    },
+    hideDetail() {
+      this.detailShow = false
     }
   },
   created() {
