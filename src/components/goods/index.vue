@@ -1,31 +1,20 @@
 <template>
   <div class="goods">
-    <div class="menu-wrapper"
-         ref="menuWrapper">
+    <div class="menu-wrapper" ref="menuWrapper">
       <ul>
-        <li v-for="(item,$index) in goods"
-            class="menu-item"
-            @click="selectMenu($index)"
-            :class="{'current':currentIndex===$index}">
+        <li v-for="(item,$index) in goods" class="menu-item" @click="selectMenu($index)" :class="{'current':currentIndex===$index}">
           <span class="text border-1px border-bottom"><span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>{{item.name}}</span>
         </li>
       </ul>
     </div>
-    <div class="foods-wrapper"
-         ref="foodsWrapper">
+    <div class="foods-wrapper" ref="foodsWrapper">
       <ul>
-        <li v-for="item in goods"
-            class="food-list food-list-hook">
+        <li v-for="item in goods" class="food-list food-list-hook">
           <h1 class="title">{{item.name}}</h1>
           <ul>
-            <li v-for="food in item.foods"
-                class="food-item border-1px border-bottom">
+            <li v-for="food in item.foods" class="food-item border-1px border-bottom">
               <div class="icon">
-                <img :src="food.icon"
-                     alt=""
-                     class=""
-                     width="57"
-                     height="57">
+                <img :src="food.icon" alt="" class="" width="57" height="57">
               </div>
               <div class="content">
                 <h2 class="name">{{food.name}}</h2>
@@ -36,8 +25,7 @@
                 </div>
                 <div class="price">
                   <span class="now">￥{{food.price}}</span>
-                  <span class="old"
-                        v-show="food.oldPrice">￥{{food.oldPrice}}</span>
+                  <span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
                 </div>
               </div>
             </li>
@@ -45,24 +33,29 @@
         </li>
       </ul>
     </div>
+    <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 import BScroll from 'better-scroll'
+import shopcart from '@/components/shopcart'
 const ERR_OK = 0
 export default {
-  // props: {
-  //   goods: {
-  //     type: Object
-  //   }
-  // },
+  props: {
+    seller: {
+      type: Object
+    }
+  },
   data() {
     return {
       goods: [],
       listHeight: [],
       scrollY: 0
     }
+  },
+  components: {
+    shopcart
   },
   computed: {
     currentIndex() {
@@ -94,6 +87,9 @@ export default {
   methods: {
     selectMenu(index) {
       console.log(index)
+      let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook')
+      let foodItem = foodList[index]
+      this.foodsScroll.scrollToElement(foodItem)
     },
     _initScroll() {
       this.meunScroll = new BScroll(this.$refs.menuWrapper, { click: true })
