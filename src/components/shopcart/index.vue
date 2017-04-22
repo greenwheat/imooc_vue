@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     drop(el) {
-      console.log(el)
+      // console.log(el)
       for (let i = 0; i < this.balls.length; i++) {
         let ball = this.balls[i]
         if (!ball.show) {
@@ -108,7 +108,7 @@ export default {
     },
     beforeEnter(el) {
       let count = this.balls.length
-      console.log('count', count)
+      // console.log('count', count)
       while (count--) {
         let ball = this.balls[count]
         if (ball.show) {
