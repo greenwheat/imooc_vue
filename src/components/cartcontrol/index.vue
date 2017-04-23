@@ -1,12 +1,12 @@
 <template>
 <div class="cartcontrol">
-  <transition name="move">
-    <div class="cart-decrease" v-show="food.count>0" @click="decreaseCart">
-      <i class="inner icon-remove_circle_outline"></i>
-    </div>
-  </transition>
-  <div class="cart-count" v-show="food.count>0">{{food.count}}</div>
-  <div class="cart-add icon-add_circle" @click="addCart"></div>
+	<transition name="move">
+		<div class="cart-decrease" v-show="food.count>0" @click="decreaseCart">
+			<i class="inner icon-remove_circle_outline"></i>
+		</div>
+	</transition>
+	<div class="cart-count" v-show="food.count>0">{{food.count}}</div>
+	<div class="cart-add icon-add_circle" @click="addCart"></div>
 </div>
 </template>
 
@@ -14,36 +14,36 @@
 import Vue from 'vue'
 
 export default {
-  props: {
-    food: {
-      type: Object
-    }
-  },
-  created() {
-    // console.log('cartcontrol', this.food)
-  },
-  methods: {
-    addCart(event) {
-      console.log('click')
-      if (!event._constructed) {
-        return false
-      }
-      if (!this.food.count) {
-        Vue.set(this.food, 'count', 1)
-      } else {
-        this.food.count++
-      }
+	props: {
+		food: {
+			type: Object
+		}
+	},
+	created() {
+		// console.log('cartcontrol', this.food)
+	},
+	methods: {
+		addCart(event) {
+			console.log('click')
+			if(!event._constructed) {
+				return false
+			}
+			if(!this.food.count) {
+				Vue.set(this.food, 'count', 1)
+			} else {
+				this.food.count++
+			}
 
-      this.$emit('cardadd', event.target)
-    },
-    decreaseCart(event) {
-      console.log('click')
-      if (!event._constructed) {
-        return false
-      }
-      this.food.count--
-    }
-  }
+			this.$emit('cardadd', event.target)
+		},
+		decreaseCart(event) {
+			console.log('click')
+			if(!event._constructed) {
+				return false
+			}
+			this.food.count--
+		}
+	}
 }
 </script>
 
