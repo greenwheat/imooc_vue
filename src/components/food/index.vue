@@ -1,39 +1,39 @@
 <template>
-<transition name="move">
-	<div v-show="showFlag" class="food" ref="food">
-		<div class="foo-content">
-			<div class="image-header">
-				<img :src="food.image" alt="">
-				<div class="back" @click="hide">
-					<i class="icon-arrow_lift"></i>
-				</div>
-			</div>
-			<div class="content">
-				<h1 class="title">{{food.name}}</h1>
-				<div class="detail">
-					<span class="sell-count">月售{{food.sellCount}}份</span>
-					<span class="rating">好评率{{food.rating}}%</span>
-				</div>
-				<div class="price">
-					<span class="now">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
-				</div>
-				<div class="cartcontrol-warpper">
-					<cartcontrol :food="food" v-on:cardadd="_cardadd"></cartcontrol>
-				</div>
-				<transition name="fade">
-					<div class="buy" @click.stop.prevent="addFirst" v-show="!food.count || food.count===0">加入购物车</div>
-				</transition>
-			</div>
-			<split></split>
-			<div class="info" v-show="food.info">
-				<h1 class="title">商品信息</h1>
-				<p class="text">{{food.info}}</p>
-			</div>
-			<split></split>
-
-		</div>
-	</div>
-</transition>
+    <transition name="move">
+        <div v-show="showFlag" class="food" ref="food">
+            <div class="foo-content">
+                <div class="image-header">
+                    <img :src="food.image" alt="">
+                    <div class="back" @click="hide">
+                        <i class="icon-arrow_lift"></i>
+                    </div>
+                </div>
+                <div class="content">
+                    <h1 class="title">{{food.name}}</h1>
+                    <div class="detail">
+                        <span class="sell-count">月售{{food.sellCount}}份</span>
+                        <span class="rating">好评率{{food.rating}}%</span>
+                    </div>
+                    <div class="price">
+                        <span class="now">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
+                    </div>
+                    <div class="cartcontrol-warpper">
+                        <cartcontrol :food="food" v-on:cardadd="_cardadd"></cartcontrol>
+                    </div>
+                    <transition name="fade">
+                        <div class="buy" @click.stop.prevent="addFirst" v-show="!food.count || food.count===0">加入购物车</div>
+                    </transition>
+                </div>
+                <split></split>
+                <div class="info" v-show="food.info">
+                    <h1 class="title">商品信息</h1>
+                    <p class="text">{{food.info}}</p>
+                </div>
+                <split></split>
+    
+            </div>
+        </div>
+    </transition>
 </template>
 
 <script type="text/ecmascript-6">
@@ -43,47 +43,47 @@ import cartcontrol from '@/components/cartcontrol'
 import split from '@/components/split'
 
 export default {
-	props: {
-		food: {
-			type: Object
-		}
-	},
-	components: {
-		cartcontrol,
-		split
-	},
-	data() {
-		return {
-			showFlag: false
-		}
-	},
-	methods: {
-		show() {
-			this.showFlag = true
-			this.$nextTick(() => {
-				if(!this.scroll) {
-					this.scroll = new BScroll(this.$refs.food, {
-						click: true
-					})
-				} else {
-					this.scroll.refresh()
-				}
-			})
-		},
-		hide() {
-			this.showFlag = false
-		},
-		addFirst(event) {
-			if(!event._constructed) {
-				return
-			}
-			this._cardadd(event.target)
-			Vue.set(this.food, 'count', 1)
-		},
-		_cardadd(target) {
-			this.$emit('cardadd', target)
-		}
-	}
+    props: {
+        food: {
+            type: Object
+        }
+    },
+    components: {
+        cartcontrol,
+        split
+    },
+    data() {
+        return {
+            showFlag: false
+        }
+    },
+    methods: {
+        show() {
+            this.showFlag = true
+            this.$nextTick(() => {
+                if (!this.scroll) {
+                    this.scroll = new BScroll(this.$refs.food, {
+                        click: true
+                    })
+                } else {
+                    this.scroll.refresh()
+                }
+            })
+        },
+        hide() {
+            this.showFlag = false
+        },
+        addFirst(event) {
+            if (!event._constructed) {
+                return
+            }
+            this._cardadd(event.target)
+            Vue.set(this.food, 'count', 1)
+        },
+        _cardadd(target) {
+            this.$emit('cardadd', target)
+        }
+    }
 }
 </script>
 
@@ -103,7 +103,7 @@ export default {
     }
     &.move-enter,
     &.move-leave-active {
-        transform: translate3d(100%,0,0);
+        transform: translate3d(100%, 0, 0);
     }
 
     .image-header {
@@ -215,6 +215,5 @@ export default {
             color: #4d555d;
         }
     }
-
 }
 </style>

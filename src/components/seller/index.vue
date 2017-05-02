@@ -1,7 +1,7 @@
 <template>
-<div class="header">
-	我是seller
-</div>
+	<div class="header">
+		我是seller
+	</div>
 </template>
 
 <script type="text/ecmascript-6">

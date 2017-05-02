@@ -24,21 +24,20 @@ module.exports = {
       "error", {
         "overrides": {
           "if": {
-            "after": false
+            "after": true
           },
           "for": {
-            "after": false
+            "after": true
           },
           "while": {
-            "after": false
+            "after": true
           }
         }
       }
     ],
     "indent": 0,
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production'
-      ? 2
-      : 0
+    'no-debugger': process.env.NODE_ENV === 'production' ?
+      2 : 0
   }
 }
